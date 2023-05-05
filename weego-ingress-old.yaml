@@ -1,0 +1,80 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=4000
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    kubernetes.io/ingress.class: alb
+  name: weego-ingress
+  namespace: weego-old
+spec:
+  rules:
+  - host: dev-api.weegolife.com
+    http:
+      paths:
+      - backend:
+          serviceName: weego-auth-service-service
+          servicePort: 80
+        path: "/auth*"
+      - backend:
+          serviceName: weego-routes-service-service
+          servicePort: 80
+        path: "/routes*"
+      - backend:
+          serviceName: weego-tracking-service-service
+          servicePort: 80
+        path: "/tracking*"
+      - backend:
+          serviceName: weego-payment-service-service
+          servicePort: 80
+        path: "/payment*"
+      - backend:
+          serviceName: weego-traffic-service-service
+          servicePort: 80
+        path: "/congestiontraffic*"
+      - backend:
+          serviceName: weego-ride-booking-service-service
+          servicePort: 80
+        path: "/ride-booking*"
+      - backend:
+          serviceName: weego-tts-service-service
+          servicePort: 80
+        path: "/tts*"
+      - backend:
+          serviceName: weego-automatic-planner-service-service
+          servicePort: 80
+        path: "/planner*"
+      - backend:
+          serviceName: weego-notifications-service-service
+          servicePort: 80
+        path: "/notifservice*"
+      - backend:
+          serviceName: gui-simulator-service
+          servicePort: 80
+        path: "/simulator*"
+      - backend:
+          serviceName: weego-feature-availability-service-service
+          servicePort: 80
+        path: "/fas*"
+      - backend:
+          serviceName: weego-scripts-service-service
+          servicePort: 80
+        path: "/scripts*"
+      - backend:
+          serviceName: weego-chat-service-service
+          servicePort: 80
+        path: "/chat*"
+      - backend:
+          serviceName: weego-alert-service-boti-service
+          servicePort: 80
+        path: "/alerts*"
+      - backend:
+          serviceName: weego-planning-service-service
+          servicePort: 80
+        path: "/planning*"
+      - backend:
+          serviceName: weego-promo-service-service
+          servicePort: 80
+        path: "/promo*"
